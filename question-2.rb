@@ -7,6 +7,7 @@ def decode_string(s)
   while s.include? "["
     arr = s.split("[")
     #["4", "ab]"]
+    binding.pry
     num = arr.shift.to_i
     #4, arr = ["ab]"]
     new_str = arr.join("[")
@@ -18,7 +19,7 @@ def decode_string(s)
   s
 end
 
-puts "abababab expected"
-puts decode_string("4[ab]")
-# puts "baaabaaa expected"
-# puts decode_string("2[b3[a]]")
+# puts "abababab expected"
+# puts decode_string("4[ab]")
+puts "baaabaaa expected"
+puts decode_string("2[b3[a]]")
