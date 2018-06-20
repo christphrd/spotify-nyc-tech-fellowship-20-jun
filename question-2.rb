@@ -1,10 +1,10 @@
-require 'pry'
-
 def decode_string(s)
   results_arr = []
 
-  arr = s.chars
-  array = arr.map do |char|
+  #turn string into array of char
+  chars = s.chars
+  #reverse array and make numbers integers instead of strings
+  num_array = chars.map do |char|
     if char.to_i != 0
       char.to_i
     else
@@ -12,28 +12,26 @@ def decode_string(s)
     end
   end.reverse
 
-
-  array.each_with_index do |element, index|
+  #find the innermost and multiply by number. combine with the rest of the array
+  num_array.each_with_index do |element, index|
     if element == "["
-      multiplied = array[0..index] * array[index + 1]
-      results_arr = multiplied + array[index + 2...array.length]
+      multiplied = num_array[0..index] * num_array[index + 1]
+      results_arr = multiplied.join("").delete("[]").split("") + num_array[index + 2...num_array.length]
       break
     end
   end
 
-  # binding.pry
-
   braced_results_str = results_arr.join("").reverse
-  decoded = braced_results_str.delete("[]")
 
+  #check if there is still a number. recursion
+  if braced_results_str.to_i != 0
+    braced_results_str = decode_string(braced_results_str)
+  end
+
+  decoded = braced_results_str.delete("[]")
 end
 
 puts "abababab expected"
 puts decode_string("4[ab]")
 puts "baaabaaa expected"
 puts decode_string("2[b3[a]]")
-
-#for loop equivalent
-# array.each_with_index do |element,index|
-#   element.do_stuff(index)
-# end
