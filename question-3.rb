@@ -1,3 +1,5 @@
+#check lines 11-15 for more cases
+
 def change_possibilities(amount,denominations)
   #sort array and remove duplicates
   count = 0
