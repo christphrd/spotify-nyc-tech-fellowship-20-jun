@@ -7,9 +7,10 @@ def change_possibilities(amount,denominations)
   desc_ordered.each { |denomination| count += 1 if amount % denomination == 0 }
 
   #checking combos
-  # desc_ordered.each_with_index do |denomination, index|
-  #   leftover = amount - denomination
-  # end
+  desc_ordered.each_with_index do |denomination, index|
+    leftover = amount - denomination
+    desc_ordered[index + 1..desc_ordered.length].each { |d| count += 1 if leftover % d == 0 }
+  end
 
   count
 end
